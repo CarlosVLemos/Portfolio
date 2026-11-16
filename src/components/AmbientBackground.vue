@@ -1,5 +1,7 @@
 <script setup lang="ts">
 defineProps<{ paused: boolean }>()
+const posterUrl = import.meta.env.BASE_URL + 'assets/hero-poster.webp'
+const animationUrl = import.meta.env.BASE_URL + 'assets/hero-synthwave.gif'
 </script>
 
 <template>
@@ -7,7 +9,7 @@ defineProps<{ paused: boolean }>()
     <img
       v-if="paused"
       class="scene-poster"
-      src="/assets/hero-poster.webp"
+       :src="posterUrl"
       alt=""
       width="763"
       height="337"
@@ -16,7 +18,7 @@ defineProps<{ paused: boolean }>()
     <img
       v-else
       class="scene-motion"
-      src="/assets/hero-synthwave.gif"
+       :src="animationUrl"
       alt=""
       width="763"
       height="337"
