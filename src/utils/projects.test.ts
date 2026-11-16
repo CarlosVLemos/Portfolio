@@ -4,15 +4,15 @@ import { filterProjects } from './projects'
 
 describe('portfolio data', () => {
   it('keeps all selected projects in the default filter', () => {
-    expect(filterProjects(projects, 'todos')).toHaveLength(4)
+    expect(filterProjects(projects, 'todos')).toHaveLength(5)
     expect(filterProjects(projects, 'todos')).not.toBe(projects)
   })
 
   it('filters by category without changing the source list', () => {
     expect(filterProjects(projects, 'backend').map((item) => item.id)).toEqual(['lcp', 'portal'])
-    expect(filterProjects(projects, 'produto').map((item) => item.id)).toEqual(['lcp', 'gestao-lab', 'verdinho'])
-    expect(filterProjects(projects, 'institucional').map((item) => item.id)).toEqual(['portal', 'gestao-lab', 'verdinho'])
-    expect(projects).toHaveLength(4)
+    expect(filterProjects(projects, 'produto').map((item) => item.id)).toEqual(['lcp', 'professor-360', 'gestao-lab', 'verdinho'])
+    expect(filterProjects(projects, 'institucional').map((item) => item.id)).toEqual(['portal', 'professor-360', 'gestao-lab', 'verdinho'])
+    expect(projects).toHaveLength(5)
   })
 
   it('provides both languages and valid categories for each project', () => {

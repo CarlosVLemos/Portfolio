@@ -178,7 +178,13 @@
     }
     @media (max-width:570px) {
       .layout {padding:0 19px;}
-      .sidebar {padding-top:25px;}
+      .sidebar {padding:22px 0 20px;}
+      .logo {margin-bottom:25px;}
+      h1 {font-size:clamp(49px,14vw,58px); margin:13px 0 10px;}
+      .tagline {font-size:18px; margin-bottom:15px;}
+      .intro {font-size:14px; line-height:1.7;}
+      .side-nav {display:none;}
+      .sidebar-bottom {padding-top:17px;}
         .project-list {grid-template-columns:1fr;}
       .project {min-height:0;}
       .metric-grid {grid-template-columns:1fr 1fr;}
