@@ -106,11 +106,12 @@
     .copy p {margin:0 0 15px;}
     .copy strong {color:var(--text); font-weight:650;}
     .copy a {color:var(--aqua); border-bottom:1px dotted rgba(117,233,219,.38);}
-    .metric-grid {display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:25px;}
+    .metric-grid {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:25px;}
     .metric {background:linear-gradient(145deg,rgba(20,38,57,.94),rgba(11,21,34,.92)); border:1px solid var(--line); padding:17px 15px 15px; border-radius:9px; min-height:119px;}
     .metric strong {display:block; font:760 clamp(24px,2.2vw,31px)/1.3 var(--sans); letter-spacing:-.05em; color:var(--text); white-space:nowrap;}
     .metric:nth-child(2) strong {color:var(--aqua);}
     .metric:nth-child(3) strong {color:var(--pink);}
+    .metric:nth-child(4) strong {color:var(--violet); white-space:normal; font-size:clamp(20px,2vw,27px);}
     .metric span {display:block; margin-top:9px; color:var(--muted); font:11px/1.55 var(--mono);}
     .section-top {display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px;}
     .section-top .segment-label {flex:1; margin:0;}
@@ -195,7 +196,6 @@
         .project-list {grid-template-columns:1fr;}
       .project {min-height:0;}
       .metric-grid {grid-template-columns:1fr 1fr;}
-      .metric:last-child {grid-column:span 2;}
       .metric {min-height:105px;}
       .metric strong {font-size:27px;}
       .experience {grid-template-columns:1fr; gap:8px; padding:19px 10px;}
@@ -267,6 +267,7 @@
           <div class="metric"><strong>~200 mil</strong><span>servidores atendidos por plataforma institucional</span></div>
           <div class="metric"><strong>9 s → 22 ms</strong><span>acesso a contracheques em fluxo crítico</span></div>
           <div class="metric"><strong>12 devs</strong><span>liderados em duas equipes na V3L0Z</span></div>
+          <div class="metric"><strong>Sistemas estaduais</strong><span>atuação em sistemas financeiros, internos e críticos</span></div>
         </div>
         <p class="metric-note">Na SEPLAD, o tempo de acesso a dados de contracheques caiu de aproximadamente 9 segundos para 22 ms após separar o acesso ao Oracle legado da API Laravel e criar um microserviço em FastAPI.</p>
       </section>
