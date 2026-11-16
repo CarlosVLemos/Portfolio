@@ -94,8 +94,8 @@
     .top-meta {display:flex; gap:10px; justify-content:space-between; align-items:center; margin-bottom:22px; font:10px/1.8 var(--mono); letter-spacing:.1em; color:var(--dim); text-transform:uppercase;}
     .top-meta .right-meta {display:flex; align-items:center; gap:9px;}
     .slash {color:var(--pink);}
-    .motion-btn {color:var(--muted); background:transparent; border:1px solid var(--line); padding:6px 10px; font:10px/1.5 var(--mono); letter-spacing:.06em; border-radius:5px; transition:border-color .2s,color .2s;}
-    .motion-btn:hover,.motion-btn[aria-pressed="true"] {color:var(--aqua); border-color:var(--aqua);}
+    .top-control {color:var(--muted); background:transparent; border:1px solid var(--line); padding:6px 10px; font:10px/1.5 var(--mono); letter-spacing:.06em; border-radius:5px; transition:border-color .2s,color .2s;}
+    .top-control:hover,.top-control[aria-pressed="true"] {color:var(--aqua); border-color:var(--aqua);}
     .segment-label {display:flex; align-items:center; gap:13px; color:var(--aqua); font:600 11px/1.5 var(--mono); letter-spacing:.12em; text-transform:uppercase; margin:0 0 23px;}
     .segment-label:after {content:""; display:block; flex:1; height:1px; background:var(--line);}
     .section {scroll-margin-top:45px; padding-top:60px;}
@@ -204,6 +204,7 @@
       .headline {font-size:28px;}
       .contact-card {padding:22px 19px;}
       .top-meta {font-size:9px;}
+      .top-meta .right-meta > span {display:none;}
     }
     @media (prefers-reduced-motion: reduce) {
       body:not(.motion-allowed) .scene-motion {display:none;}
@@ -249,7 +250,7 @@
     </aside>
 
     <main id="principal">
-      <div id="inicio" class="top-meta"><span>PORTFÓLIO <span class="slash">/</span> 2026</span><div class="right-meta"><span>Belém · PA</span><button id="motion-toggle" class="motion-btn" type="button" aria-pressed="false" title="Pausar ou retomar a animação do fundo">Pausar fundo</button></div></div>
+      <div id="inicio" class="top-meta"><span>PORTFÓLIO <span class="slash">/</span> 2026</span><div class="right-meta"><span>Belém · PA</span><button id="language-toggle" class="top-control" type="button" aria-label="Exibir o portfólio em inglês">English</button><button id="motion-toggle" class="top-control" type="button" aria-pressed="false" title="Pausar ou retomar a animação do fundo">Pausar fundo</button></div></div>
 
       <section class="section" id="sobre" aria-labelledby="sobre-title">
         <div class="segment-label">01 <span class="slash">/</span> sobre mim</div>
@@ -376,6 +377,147 @@
       const select = (selector) => document.querySelector(selector);
       const all = (selector) => Array.from(document.querySelectorAll(selector));
 
+      const translations = new Map([
+        ['Pular para o conteúdo', 'Skip to content'],
+        ['lemos / portfólio', 'lemos / portfolio'],
+        ['BELÉM, PARÁ · BRASIL', 'BELÉM, PARÁ · BRAZIL'],
+        ['Engenheiro de software full stack.', 'Full stack software engineer.'],
+        ['Backend, APIs, integração de sistemas e manutenção de aplicações legadas. Experiência com testes, Docker e bancos de dados.', 'Backend, APIs, systems integration, and legacy application maintenance. Experience with testing, Docker, and databases.'],
+        ['01 / Sobre', '01 / About'],
+        ['02 / Impacto', '02 / Impact'],
+        ['03 / Projetos', '03 / Projects'],
+        ['04 / Experiência', '04 / Experience'],
+        ['05 / Contato', '05 / Contact'],
+        ['disponível para oportunidades', 'available for opportunities'],
+        ['PORTFÓLIO', 'PORTFOLIO'],
+        ['sobre mim', 'about me'],
+        ['Sobre mim', 'About me'],
+        ['Sou engenheiro de software full stack com', 'I am a full stack software engineer with'],
+        ['3 anos de experiência', '3 years of experience'],
+        ['em desenvolvimento e modernização de sistemas institucionais. Trabalho principalmente com backend, bancos de dados, integrações e APIs.', 'developing and modernizing institutional systems. I mainly work with backend systems, databases, integrations, and APIs.'],
+        ['Minha experiência inclui SEPLAD, Polícia Civil do Pará e V3L0Z. Também desenvolvo projetos próprios para testar ferramentas e decisões de arquitetura.', 'My experience includes SEPLAD, the Pará Civil Police, and V3L0Z. I also build personal projects to evaluate tools and architectural decisions.'],
+        ['resultados', 'results'],
+        ['Alguns resultados', 'Selected results'],
+        ['~200 mil', '~200K'],
+        ['servidores atendidos por plataforma institucional', 'public servants served by an institutional platform'],
+        ['acesso a contracheques em fluxo crítico', 'payroll statement access in a critical workflow'],
+        ['liderados em duas equipes na V3L0Z', 'led across two teams at V3L0Z'],
+        ['Sistemas estaduais', 'Statewide systems'],
+        ['atuação em sistemas financeiros, internos e críticos', 'work on financial, internal, and mission-critical systems'],
+        ['Na SEPLAD, o tempo de acesso a dados de contracheques caiu de aproximadamente 9 segundos para 22 ms após separar o acesso ao Oracle legado da API Laravel e criar um microserviço em FastAPI.', 'At SEPLAD, payroll statement data access dropped from approximately 9 seconds to 22 ms after separating legacy Oracle access from the Laravel API and building a FastAPI microservice.'],
+        ['projetos', 'projects'],
+        ['Projetos selecionados', 'Selected projects'],
+        ['Seleção de projetos pessoais e produtos em que trabalhei. Repositórios institucionais não são públicos.', 'A selection of personal projects and products I have worked on. Institutional repositories are private.'],
+        ['Todos', 'All'],
+        ['Produto', 'Product'],
+        ['Institucional', 'Institutional'],
+        ['projeto próprio · MVP', 'personal project · MVP'],
+        ['Aplicação para comparar execuções e resultados de testes. API FastAPI, persistência em PostgreSQL, frontend em Vue e experimentos documentados.', 'Application for comparing test runs and results. FastAPI API, PostgreSQL persistence, Vue frontend, and documented experiments.'],
+        ['Testes', 'Testing'],
+        ['Repositório ↗', 'Repository ↗'],
+        ['SEPLAD · código privado', 'SEPLAD · private code'],
+        ['Atuação na modernização do acesso a contracheques de uma plataforma usada por cerca de 200 mil servidores. Serviço FastAPI para consulta a dados Oracle.', 'Helped modernize payroll statement access on a platform used by approximately 200,000 public servants. FastAPI service for querying Oracle data.'],
+        ['V3L0Z · produto acadêmico', 'V3L0Z · academic product'],
+        ['Atuei no produto de gestão de laboratórios da UNAMA, voltado a reservas de salas, software e ocupação dos espaços.', 'Worked on UNAMA’s laboratory management product for room reservations, software requests, and space occupancy.'],
+        ['Gestão de laboratórios', 'Laboratory management'],
+        ['Ver produto ↗', 'View product ↗'],
+        ['Atuei no produto para organização de eventos acadêmicos, inscrições e controle de presença. Também dei suporte a outros sistemas do ecossistema.', 'Worked on a product for organizing academic events, registrations, and attendance tracking. I also supported other systems in the ecosystem.'],
+        ['Eventos', 'Events'],
+        ['experiência', 'experience'],
+        ['Experiência', 'Experience'],
+        ['dez 2025', 'Dec 2025'],
+        ['— atual', '— present'],
+        ['Engenheiro de Software', 'Software Engineer'],
+        ['Desenvolvimento e modernização de sistemas institucionais. Integrações com Oracle, microserviços FastAPI, segurança de documentos, Docker e testes.', 'Development and modernization of institutional systems. Oracle integrations, FastAPI microservices, document security, Docker, and testing.'],
+        ['abr 2025', 'Apr 2025'],
+        ['out 2025', 'Oct 2025'],
+        ['Desenvolvedor Full Stack', 'Full Stack Developer'],
+        ['Desenvolvimento e modernização de sistemas internos de alta criticidade, com foco em integridade de dados, correção de vulnerabilidade em legado e fluxos operacionais.', 'Development and modernization of mission-critical internal systems, focusing on data integrity, legacy vulnerability remediation, and operational workflows.'],
+        ['Segurança', 'Security'],
+        ['mar 2024', 'Mar 2024'],
+        ['mar 2025', 'Mar 2025'],
+        ['Full Stack · Liderança Técnica', 'Full Stack · Technical Leadership'],
+        ['Atuei no Gestão Lab e no Verdinho Eventos e prestei suporte a outros produtos do', 'I worked on Gestão Lab and Verdinho Eventos and supported other products in the'],
+        ['Ecossistema Veloz ↗', 'Veloz Ecosystem ↗'],
+        ['. Também exerci liderança técnica de duas equipes (12 desenvolvedores), com trabalho em modelagem de dados e entregas de software.', '. I also provided technical leadership for two teams (12 developers), working on data modeling and software delivery.'],
+        ['Formação · Análise e Desenvolvimento de Sistemas', 'Education · Systems Analysis and Development'],
+        ['Universidade da Amazônia (UNAMA), 2024–2026. Certificações em testes de software e cibersegurança.', 'University of the Amazon (UNAMA), 2024–2026. Certifications in software testing and cybersecurity.'],
+        ['tecnologias', 'technologies'],
+        ['Tecnologias', 'Technologies'],
+        ['Tecnologias com as quais trabalhei em produção, manutenção, automação e projetos próprios.', 'Technologies I have used in production, maintenance, automation, and personal projects.'],
+        ['n8n / Automação de fluxos', 'n8n / Workflow automation'],
+        ['Agentes locais / IA aplicada', 'Local agents / Applied AI'],
+        ['Testes automatizados', 'Automated testing'],
+        ['Testes de segurança', 'Security testing'],
+        ['Segurança / Observabilidade', 'Security / Observability'],
+        ['contato', 'contact'],
+        ['Contato', 'Contact'],
+        ['Contato profissional por email ou LinkedIn. Currículo disponível em PDF.', 'For professional inquiries, contact me by email or LinkedIn. My résumé is available as a PDF.'],
+        ['Enviar email ↗', 'Send email ↗'],
+        ['Baixar currículo ↓', 'Download résumé ↓'],
+        ['Projetado e desenvolvido por Carlos Lemos.', 'Designed and developed by Carlos Lemos.'],
+        ['HTML, CSS e JavaScript. Sem dependências externas.', 'HTML, CSS, and JavaScript. No external dependencies.']
+      ]);
+      const attributeTranslations = new Map([
+        ['Carlos Lemos — início', 'Carlos Lemos — home'],
+        ['Apresentação e navegação', 'Introduction and navigation'],
+        ['Seções do portfólio', 'Portfolio sections'],
+        ['Links profissionais', 'Professional links'],
+        ['GitHub de Carlos Lemos (nova aba)', 'Carlos Lemos on GitHub (new tab)'],
+        ['LinkedIn de Carlos Lemos (nova aba)', 'Carlos Lemos on LinkedIn (new tab)'],
+        ['Enviar email para Carlos Lemos', 'Send an email to Carlos Lemos'],
+        ['Ir para seção de currículo', 'Go to résumé section'],
+        ['Currículo', 'Résumé'],
+        ['Resultados profissionais', 'Professional results'],
+        ['Filtrar projetos por área', 'Filter projects by area'],
+        ['Tecnologias', 'Technologies'],
+        ['Pausar ou retomar a animação do fundo', 'Pause or resume the background animation']
+      ]);
+      const textEntries = [];
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          return node.parentElement && !node.parentElement.closest('script, style') && translations.has(node.nodeValue.trim())
+            ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        const pt = node.nodeValue.trim();
+        textEntries.push({ node, pt, en: translations.get(pt) });
+      }
+      const attributeEntries = [];
+      all('[aria-label], [title]').forEach(element => ['aria-label', 'title'].forEach(attribute => {
+        const pt = element.getAttribute(attribute);
+        if (attributeTranslations.has(pt)) attributeEntries.push({ element, attribute, pt, en: attributeTranslations.get(pt) });
+      }));
+      const languageToggle = select('#language-toggle');
+      let currentLanguage = 'pt-BR';
+      function replaceText(entry, value) {
+        const leading = entry.node.nodeValue.match(/^\s*/)[0];
+        const trailing = entry.node.nodeValue.match(/\s*$/)[0];
+        entry.node.nodeValue = leading + value + trailing;
+      }
+      function applyLanguage(language) {
+        const english = language === 'en';
+        currentLanguage = english ? 'en' : 'pt-BR';
+        document.documentElement.lang = currentLanguage;
+        textEntries.forEach(entry => replaceText(entry, english ? entry.en : entry.pt));
+        attributeEntries.forEach(entry => entry.element.setAttribute(entry.attribute, english ? entry.en : entry.pt));
+        document.title = english ? 'Carlos Lemos — Software Engineer' : 'Carlos Lemos — Engenheiro de Software';
+        select('meta[name="description"]').content = english
+          ? 'Carlos Lemos — Full stack software engineer. Backend, systems integration, performance, and observability.'
+          : 'Carlos Lemos — Engenheiro de software full stack. Backend, integração de sistemas, performance e observabilidade.';
+        select('meta[property="og:title"]').content = english ? 'Carlos Lemos — Software Engineer' : 'Carlos Lemos — Software Engineer';
+        select('meta[property="og:description"]').content = english
+          ? 'Portfolio featuring experience, projects, and technical results.'
+          : 'Portfólio com experiência, projetos e resultados técnicos.';
+        languageToggle.textContent = english ? 'Português' : 'English';
+        languageToggle.setAttribute('aria-label', english ? 'Exibir o portfólio em português' : 'Exibir o portfólio em inglês');
+        const emailLink = select('.button.primary');
+        emailLink.href = english ? 'mailto:carlosvictorlemosdasilva26@gmail.com?subject=Professional%20inquiry' : 'mailto:carlosvictorlemosdasilva26@gmail.com?subject=Contato%20profissional';
+        try { localStorage.setItem('portfolio-language', currentLanguage); } catch (_) {}
+      }
+
       all('[data-filter]').forEach(button => button.addEventListener('click', () => {
         const filter = button.dataset.filter;
         all('[data-filter]').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
@@ -388,9 +530,16 @@
       const refreshMotionLabel = () => {
         const paused = document.body.classList.contains('motion-paused');
         motionToggle.setAttribute('aria-pressed', String(paused));
-        motionToggle.textContent = paused ? 'Retomar fundo' : 'Pausar fundo';
+        motionToggle.textContent = currentLanguage === 'en' ? (paused ? 'Resume background' : 'Pause background') : (paused ? 'Retomar fundo' : 'Pausar fundo');
       };
+      let savedLanguage = 'pt-BR';
+      try { savedLanguage = localStorage.getItem('portfolio-language') || 'pt-BR'; } catch (_) {}
+      applyLanguage(savedLanguage === 'en' ? 'en' : 'pt-BR');
       refreshMotionLabel();
+      languageToggle.addEventListener('click', () => {
+        applyLanguage(currentLanguage === 'en' ? 'pt-BR' : 'en');
+        refreshMotionLabel();
+      });
       motionToggle.addEventListener('click', () => {
         const paused = document.body.classList.toggle('motion-paused');
         document.body.classList.toggle('motion-allowed', !paused);
