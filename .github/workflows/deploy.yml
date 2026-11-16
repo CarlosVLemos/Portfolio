@@ -62,3 +62,30 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Verify public site serves compiled Vue assets
+        shell: bash
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          html="$RUNNER_TEMP/public-index.html"
+          module=""
+          for attempt in {1..12}; do
+            if curl -fsSL --max-time 15 -o "$html" "${SITE_URL}?deploy=${GITHUB_SHA}&attempt=${attempt}"; then
+              module=$(grep -oE 'src="[^"]+/assets/[^"]+\.js"' "$html" | head -n 1 | cut -d '"' -f 2 || true)
+              if [[ -n "$module" ]]; then break; fi
+            fi
+            echo "Attempt $attempt: public page does not yet expose a compiled JS bundle"
+            sleep 5
+          done
+          if [[ -z "$module" ]]; then
+            echo "::error::Public page is not serving the Vite output. HTML excerpt:"
+            head -c 1200 "$html" || true
+            exit 1
+          fi
+          echo "Published module: $module"
+          origin=$(python3 -c 'import sys,urllib.parse; u=urllib.parse.urlsplit(sys.argv[1]); print(u.scheme+"://"+u.netloc)' "$SITE_URL")
+          curl -fsSL --max-time 15 -o "$RUNNER_TEMP/site-bundle.js" "$origin$module"
+          test -s "$RUNNER_TEMP/site-bundle.js"
+          echo "Public HTML and JavaScript bundle returned HTTP 200."
