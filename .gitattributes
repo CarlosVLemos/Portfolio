@@ -1,0 +1,6 @@
+# Linguist: classify application sources using their actual languages.
+*.vue linguist-language=Vue
+*.ts linguist-language=TypeScript
+
+# This standalone HTML resume is a document, not part of the Vue application.
+resume/** linguist-documentation
