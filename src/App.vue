@@ -137,7 +137,7 @@ onUnmounted(() => {
 
       <section id="impacto" class="section" aria-labelledby="impacto-title">
         <SectionHeading number="02" :label="content.impactLabel" :title="content.impactTitle" heading-id="impacto-title" />
-        <MetricGrid :items="metrics" :language="language" :aria-label="content.impactAria" />
+        <MetricGrid :items="metrics" :language="language" :label="content.impactAria" />
         <p class="metric-note">{{ content.impactNote }}</p>
       </section>
 
