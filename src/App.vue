@@ -43,8 +43,14 @@ function updateMetadata(): void {
   document.title = content.value.metadata.title
   const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
   const ogDescription = document.querySelector<HTMLMetaElement>('meta[property="og:description"]')
+  const ogUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]')
+  const ogImage = document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+  const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
   if (description) description.content = content.value.metadata.description
   if (ogDescription) ogDescription.content = content.value.metadata.ogDescription
+  if (ogUrl) ogUrl.content = window.location.origin + window.location.pathname
+  if (ogImage) ogImage.content = window.location.origin + '/assets/hero-poster.webp'
+  if (canonical) canonical.href = window.location.origin + window.location.pathname
 }
 watch(language, updateMetadata)
 
@@ -128,7 +134,7 @@ onUnmounted(() => {
       </div>
 
       <section id="sobre" class="section" aria-labelledby="sobre-title">
-        <SectionHeading number="01" :label="content.aboutLabel" :title="content.aboutTitle" heading-id="sobre-title" />
+        <SectionHeading number="01" :title="content.aboutTitle" heading-id="sobre-title" />
         <div class="copy">
           <p>{{ content.aboutBefore }} <strong>{{ content.aboutEmphasis }}</strong> {{ content.aboutAfter }}</p>
           <p>{{ content.aboutSecond }}</p>
@@ -136,13 +142,13 @@ onUnmounted(() => {
       </section>
 
       <section id="impacto" class="section" aria-labelledby="impacto-title">
-        <SectionHeading number="02" :label="content.impactLabel" :title="content.impactTitle" heading-id="impacto-title" />
+        <SectionHeading number="02" :title="content.impactTitle" heading-id="impacto-title" />
         <MetricGrid :items="metrics" :language="language" :label="content.impactAria" />
         <p class="metric-note">{{ content.impactNote }}</p>
       </section>
 
       <section id="projetos" class="section" aria-labelledby="projetos-title">
-        <SectionHeading number="03" :label="content.projectsLabel" :title="content.projectsTitle" heading-id="projetos-title" />
+        <SectionHeading number="03" :title="content.projectsTitle" heading-id="projetos-title" />
         <p class="copy" style="margin:-7px 0 17px">{{ content.projectsIntro }}</p>
         <div class="project-filters" role="group" :aria-label="content.projectsFilterAria">
           <button
@@ -165,7 +171,7 @@ onUnmounted(() => {
       </section>
 
       <section id="experiencia" class="section" aria-labelledby="experiencia-title">
-        <SectionHeading number="04" :label="content.experienceLabel" :title="content.experienceTitle" heading-id="experiencia-title" />
+        <SectionHeading number="04" :title="content.experienceTitle" heading-id="experiencia-title" />
         <ExperienceTimeline :items="experiences" :language="language" />
         <div class="study">
           <strong>{{ content.educationTitle }}</strong>
@@ -174,7 +180,7 @@ onUnmounted(() => {
       </section>
 
       <section id="ferramentas" class="section" aria-labelledby="ferramentas-title">
-        <SectionHeading number="+" :label="content.toolsLabel" :title="content.toolsTitle" heading-id="ferramentas-title" />
+        <SectionHeading number="+" :title="content.toolsTitle" heading-id="ferramentas-title" />
         <p class="copy" style="margin:-7px 0 18px">{{ content.toolsDescription }}</p>
         <div class="skills" :aria-label="content.toolsTitle">
           <span v-for="skill in skills" :key="skill">{{ skill }}</span>
@@ -182,7 +188,7 @@ onUnmounted(() => {
       </section>
 
       <section id="contato" class="section" aria-labelledby="contato-title">
-        <div class="segment-label">05 <span class="slash">/</span> {{ content.contactLabel }}</div>
+        <div class="segment-label" aria-hidden="true">05 <span class="slash">/</span></div>
         <div class="contact-card">
           <h2 id="contato-title">{{ content.contactTitle }}</h2>
           <p>{{ content.contactDescription }}</p>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Currículo — Carlos Lemos</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #e7e9ec; color: #15202b; font-family: Arial, Helvetica, sans-serif; }
+    body { font-size: 9.4pt; line-height: 1.38; }
+    .page { position: relative; width: 210mm; min-height: 297mm; margin: 0 auto 10mm; padding: 13mm 15mm 12mm; background: #fff; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+    header { border-bottom: 2px solid #123c4a; padding-bottom: 6mm; margin-bottom: 5mm; }
+    h1 { margin: 0 0 1.5mm; color: #0d3440; font-size: 24pt; letter-spacing: -.5pt; }
+    .role { color: #277686; font-size: 11.5pt; font-weight: 700; margin-bottom: 2.5mm; }
+    .contact { display: flex; flex-wrap: wrap; gap: 1.5mm 4mm; color: #425466; font-size: 8.5pt; }
+    a { color: #1c6978; text-decoration: none; }
+    h2 { color: #0d4d5b; font-size: 11.5pt; text-transform: uppercase; letter-spacing: .7pt; margin: 5mm 0 2.5mm; border-bottom: 1px solid #b7cbd0; padding-bottom: 1.2mm; }
+    h3 { margin: 0; font-size: 10.3pt; color: #172b38; }
+    p { margin: 0 0 2.2mm; }
+    .summary { color: #354957; }
+    .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4mm 6mm; }
+    .skills div { color: #354957; }
+    .skills strong { color: #183f49; }
+    .job { margin-bottom: 4mm; break-inside: avoid; }
+    .job-head { display: flex; justify-content: space-between; gap: 8mm; align-items: baseline; margin-bottom: .8mm; }
+    .company { color: #277686; font-weight: 700; margin-bottom: 1.5mm; }
+    .date { white-space: nowrap; color: #5d6d78; font-size: 8.5pt; }
+    ul { margin: 1.5mm 0 2mm; padding-left: 4.5mm; }
+    li { margin-bottom: 1.1mm; }
+    .stack { color: #425b66; font-size: 8.4pt; }
+    .stack strong { color: #153e49; }
+    .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+    .compact p { margin-bottom: 1mm; }
+    .note { position: absolute; left: 15mm; bottom: 6mm; color: #61727c; font-size: 8pt; margin: 0; }
+    @media print { html, body { background: #fff; } .page { margin: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="page">
+      <header>
+        <h1>Carlos Lemos</h1>
+        <div class="role">Engenheiro de Software Full Stack</div>
+        <div class="contact">
+          <span>Belém, Pará</span>
+          <span>•</span>
+          <span>(91) 9 8086-9969</span>
+          <span>•</span>
+          <a href="mailto:carlosvictorlemosdasilva26@gmail.com">carlosvictorlemosdasilva26@gmail.com</a>
+          <span>•</span>
+          <a href="https://www.linkedin.com/in/carlosvlemos/">linkedin.com/in/carlosvlemos</a>
+          <span>•</span>
+          <a href="https://github.com/CarlosVLemos">github.com/CarlosVLemos</a>
+        </div>
+      </header>
+
+      <h2>Resumo profissional</h2>
+      <p class="summary">Engenheiro de software full stack com 3 anos de experiência no desenvolvimento, modernização e integração de sistemas institucionais e financeiros. Atuação em arquitetura, backend, interfaces frontend, APIs REST, microserviços, aplicações legadas, testes automatizados, conteinerização, segurança e otimização de desempenho. Experiência em liderança técnica, Spec-Driven Development e uso estratégico de IA em desenvolvimento e automações.</p>
+
+      <h2>Competências técnicas</h2>
+      <div class="skills">
+        <div><strong>Backend:</strong> Python, FastAPI, Django, PHP, Laravel, Zend, Node.js, NestJS, Java</div>
+        <div><strong>Frontend:</strong> TypeScript, JavaScript, Vue.js, React, Next.js, Inertia.js, Vite</div>
+        <div><strong>Dados:</strong> PostgreSQL, Oracle, SQL Server, MySQL, MongoDB, Redis, modelagem de dados</div>
+        <div><strong>Infraestrutura:</strong> Docker, Docker Compose, Linux, Nginx, CI/CD, Nutanix, Proxmox</div>
+        <div><strong>Qualidade:</strong> Pytest, Pest, PHPUnit, Playwright, testes automatizados, segurança, observabilidade</div>
+        <div><strong>Integrações e IA:</strong> REST, SOAP, n8n, RAG, LLMs, Codex, OpenCode, IA aplicada</div>
+      </div>
+
+      <h2>Experiência profissional</h2>
+      <article class="job">
+        <div class="job-head">
+          <h3>Engenheiro de Software</h3>
+          <span class="date">dezembro de 2025 — atual</span>
+        </div>
+        <div class="company">SEPLAD — Governo do Estado do Pará · Belém, PA</div>
+        <p>Engenharia e evolução de sistemas estratégicos da administração estadual, integrando aplicações modernas a plataformas e bancos legados.</p>
+        <ul>
+          <li>Assumi a frente técnica da evolução de uma plataforma institucional utilizada por cerca de 200 mil servidores, conduzindo decisões de arquitetura e alinhamentos com desenvolvimento, infraestrutura, gestão e cliente.</li>
+          <li>Reduzi de aproximadamente 9 segundos para 22 milissegundos o acesso a contracheques ao desacoplar a consulta ao Oracle legado da API Laravel e criar um microserviço Python/FastAPI.</li>
+          <li>Defini a arquitetura de controle e autenticação de documentos, com separação de responsabilidades, assinatura e validações contra fraude e adulteração.</li>
+          <li>Reduzi de dias para minutos a preparação de ambientes legados com uma base Docker reutilizável, incluindo SSL e conectividade com Oracle e SQL Server.</li>
+          <li>Automatizei a coleta e indexação de informações do Diário Oficial do Estado, reduzindo a dependência de buscas manuais.</li>
+          <li>Criei um serviço de URLs assinadas para imagens em buckets privados, aumentando segurança e disponibilidade sem exposição pública direta.</li>
+          <li>Estruturei testes automatizados e práticas de Spec-Driven Development, documentação contínua e observabilidade para melhorar rastreabilidade e diagnóstico.</li>
+          <li>Criei agentes especializados para Codex e OpenCode, incorporando documentação, padrões e regras dos projetos aos fluxos de engenharia.</li>
+        </ul>
+        <p class="stack"><strong>Tecnologias:</strong> Laravel, PHP, Python, FastAPI, TypeScript, PostgreSQL, Oracle, SQL Server, Docker, Nutanix, Proxmox, SOAP, testes automatizados, segurança e observabilidade.</p>
+      </article>
+    </section>
+
+    <section class="page">
+      <header>
+        <h1>Carlos Lemos</h1>
+        <div class="role">Engenheiro de Software Full Stack</div>
+      </header>
+
+      <h2>Experiência profissional — continuação</h2>
+      <article class="job">
+        <div class="job-head">
+          <h3>Desenvolvedor Full Stack</h3>
+          <span class="date">abril de 2025 — outubro de 2025</span>
+        </div>
+        <div class="company">Delegacia-Geral da Polícia Civil do Estado do Pará · Belém, PA</div>
+        <ul>
+          <li>Desenvolvi um sistema de cálculo e gestão de férias aderente às regras legais e aos procedimentos internos, com validações de integridade dos registros.</li>
+          <li>Corrigi uma vulnerabilidade crítica em um sistema legado Zend, eliminando caminhos que permitiam alterações indevidas em dados persistidos.</li>
+          <li>Desenvolvi funcionalidades de rastreio e visualização de veículos apreendidos e modernizei módulos utilizados em escala estadual.</li>
+          <li>Entreguei dois sistemas em prazo reduzido, conciliando implementação, regras institucionais, validação técnica e requisitos de segurança.</li>
+          <li>Treinei e liderei novos integrantes e contribuí para a adoção responsável de ferramentas de IA no fluxo de desenvolvimento.</li>
+        </ul>
+        <p class="stack"><strong>Tecnologias:</strong> PHP, Laravel, Zend, JavaScript, PostgreSQL, bancos relacionais, sistemas legados, testes, Git e segurança de aplicações.</p>
+      </article>
+
+      <article class="job">
+        <div class="job-head">
+          <h3>Desenvolvedor Full Stack · Liderança Técnica</h3>
+          <span class="date">março de 2024 — março de 2025</span>
+        </div>
+        <div class="company">V3L0Z · Belém, PA</div>
+        <ul>
+          <li>Liderei tecnicamente 12 desenvolvedores em duas equipes, acompanhando decisões técnicas, evolução das entregas e desenvolvimento dos integrantes.</li>
+          <li>Atuei simultaneamente na evolução de aproximadamente 10 projetos, conciliando manutenção, novas funcionalidades, arquitetura e qualidade.</li>
+          <li>Redesenhei a modelagem de dados de um sistema de gestão de espaços universitários para suportar eventos, recursos, equipamentos, mobiliário e avarias.</li>
+          <li>Liderei o Professor 360, refinando recuperação de informação e organização de contexto em um fluxo RAG para reduzir respostas inconsistentes.</li>
+          <li>Validei a solução com 20 participantes, avaliando experiência, processamento, múltiplas requisições e qualidade das respostas.</li>
+          <li>Automatizei deploys e validações com pipelines, testes de disponibilidade e controle de carga, além de estruturar testes para fluxos de IA.</li>
+        </ul>
+        <p class="stack"><strong>Tecnologias:</strong> Python, Django, TypeScript, Next.js, PostgreSQL, Docker, n8n, RAG, LLMs, CI/CD, testes automatizados, IA aplicada e modelagem de dados.</p>
+      </article>
+
+      <div class="two-cols">
+        <section class="compact">
+          <h2>Formação</h2>
+          <p><strong>Tecnólogo em Análise e Desenvolvimento de Sistemas</strong></p>
+          <p>Universidade da Amazônia — UNAMA</p>
+          <p>Concluído em março de 2026 · Belém, PA</p>
+        </section>
+        <section class="compact">
+          <h2>Certificações</h2>
+          <p><strong>Teste de software</strong> — BSTQB</p>
+          <p><strong>Cibersegurança</strong> — USP</p>
+        </section>
+      </div>
+
+      <section class="compact">
+        <h2>Mentoria</h2>
+        <p><strong>Monitor da Liga de Programação:</strong> orientação a estudantes de Análise e Desenvolvimento de Sistemas e Ciência da Computação em programação, resolução de problemas, estruturas de dados e algoritmos.</p>
+      </section>
+
+      <p class="note">Currículo atualizado em novembro de 2026.</p>
+    </section>
+  </main>
+</body>
+</html>
