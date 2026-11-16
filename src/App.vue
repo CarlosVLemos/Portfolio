@@ -15,6 +15,7 @@ const motionPaused = ref(true)
 const selectedFilter = ref<ProjectFilter>('todos')
 const activeSection = ref<SectionId>('sobre')
 const progress = ref(0)
+const publicBase = import.meta.env.BASE_URL
 
 const content = computed(() => copy[language.value])
 const visibleProjects = computed(() => filterProjects(projects, selectedFilter.value))
@@ -49,7 +50,7 @@ function updateMetadata(): void {
   if (description) description.content = content.value.metadata.description
   if (ogDescription) ogDescription.content = content.value.metadata.ogDescription
   if (ogUrl) ogUrl.content = window.location.origin + window.location.pathname
-  if (ogImage) ogImage.content = window.location.origin + '/assets/hero-poster.webp'
+  if (ogImage) ogImage.content = window.location.origin + publicBase + 'assets/hero-poster.webp'
   if (canonical) canonical.href = window.location.origin + window.location.pathname
 }
 watch(language, updateMetadata)
@@ -194,7 +195,7 @@ onUnmounted(() => {
           <p>{{ content.contactDescription }}</p>
           <div class="button-row">
             <a class="button primary" :href="emailHref">{{ content.emailButton }}</a>
-            <a class="button secondary" href="/curriculo-carlos-lemos.pdf" download="Curriculo_Carlos_Lemos.pdf">{{ content.resumeButton }}</a>
+            <a class="button secondary"  :href="publicBase + 'curriculo-carlos-lemos.pdf'" download="Curriculo_Carlos_Lemos.pdf">{{ content.resumeButton }}</a>
           </div>
         </div>
       </section>
